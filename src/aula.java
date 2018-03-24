@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.ManageUser;
+import dao.ProductDAO;
+import entidade.Product;
 
 @WebServlet("/aula")
 public class aula extends HttpServlet {
@@ -22,6 +25,10 @@ public class aula extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter resposta = response.getWriter();
+		
+		ArrayList<Product> productList = new ProductDAO().selectAll();
+		request.setAttribute("productList", productList);
+		
 		
 		String htmlFormName = request.getParameter("htmlFormName");
 		
